@@ -1,0 +1,11 @@
+{
+  "name": "skript-parser",
+  "version": "1.0.0",
+  "description": "A light-weight javascript library for parsing skript indentations in to an object to be easily read by a program.",
+  "main": "parser.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "PondWader",
+  "license": "ISC"
+}
