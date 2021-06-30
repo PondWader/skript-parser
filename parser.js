@@ -46,7 +46,7 @@ module.exports = (skript) => {
         */
 
         if (!line.startsWith(' ') && !line.startsWith('	')) {
-            if (line.trim().endsWith(':')) {
+            if (line.trim().endsWith(':') || line.trim().startsWith('#')) {
                 indents = 1;
                 indentStarter = true;
 
@@ -58,10 +58,12 @@ module.exports = (skript) => {
 
                 current.line = n;
                 current.content = line.trim();
-                current.children = [];
-
-                failedEvent = false;
-
+                if (!line.trim().startsWith('#')) {
+                    current.children = [];
+                    failedEvent = false;
+                } else {
+                    failedEvent = true;
+                }
             }
             else {
                 failedEvent = true;
@@ -142,7 +144,7 @@ module.exports = (skript) => {
                             Checking if the line ends in ":" so could potentially have child lines
                         */
 
-                        if (line.trim().endsWith(':')) {
+                        if (line.trim().endsWith(':') && !line.trim().startsWith('#')) {
                             indents++;
                             if (indentAmount === 1) {
                                 current.children.push({ line: n, content: line.trim(), children: [] });
